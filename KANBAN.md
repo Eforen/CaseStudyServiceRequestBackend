@@ -13,20 +13,19 @@
 * Write Mock Database Tests
 * Write Mock Database
 ## Done in ~1h30m
-### Next Commit
 * Commit Time off by around 20-30 min due to something coming up I needed to deal with immediately
 * Write Mock User login Tests
 * Write Mock User login
 ## Done in ~2h00m
+### Next Commit
+* Write User Auth Middleware Tests
+* Write User Auth Middleware login
 ## Done in ~2h30m
 ## Done in ~3h00m
-
 
 # Doing
 
 # Backlog
-* Write User Auth Middleware Tests
-* Write User Auth Middleware login
 * Write Create Request endpoint Test
 * Write Create Request endpoint
 * Write Get All Requests endpoint Test
@@ -39,4 +38,6 @@
 * Write Delete Request By ID endpoint
 * Write Simple Test Page
 * Write Readme
-* [BUG0001][LOW] res.json sending content type `text/html` instead of `application/json`
+* Add Tenant|Staff permission to token
+
+# 1h10m Time Dilation

@@ -3,6 +3,12 @@ import { app } from "../../../app"
 import jwt from 'jsonwebtoken'
 import * as uuid from 'uuid'
 import { CONFIG } from "../../../config";
+import { AuthMiddleware } from ".";
+
+/** This should ONLY be used by tests */
+export function MakeUnsafeUserToken(username: string){
+    return jwt.sign(JSON.stringify({username}), CONFIG.JWT.KEY)
+}
 
 describe('User', () => {
     describe('User Endpoints', () => {
@@ -39,6 +45,38 @@ describe('User', () => {
             expect(res.body).not.toHaveProperty('username')
             expect(res.body).not.toHaveProperty('token')
             done()
+        })
+    })
+    describe('User Middleware', () => {
+        it('should good token should set auth username"', async done=>{
+            var username = uuid.v4().toString();
+            var token = MakeUnsafeUserToken(username);
+            let testReq: any = {
+                headers:{
+                    authorization: `Bearer ${token}`
+                }
+            }
+            AuthMiddleware(testReq, {} as any, ()=>{
+                expect(testReq).toHaveProperty('auth')
+                expect(testReq.auth).toHaveProperty('username')
+                expect(testReq.auth.username).toEqual(username)
+                done()
+            })
+        })
+        it('should bad token should clear auth', async done=>{
+            var username = uuid.v4().toString();
+            var token = MakeUnsafeUserToken(username);
+            let testReq: any = {
+                headers:{
+                    authorization: `Bearer NotA Token`
+                },
+                auth: {username: "yoloman"}
+            }
+            AuthMiddleware(testReq, {} as any, ()=>{
+                expect(testReq).toHaveProperty('auth')
+                expect(testReq.auth).not.toHaveProperty('username')
+                done()
+            })
         })
     })
 })

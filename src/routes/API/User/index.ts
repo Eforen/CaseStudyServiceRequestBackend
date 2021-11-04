@@ -1,1 +1,1 @@
-export { default } from './mockUserAuth'
+export { default, AuthMiddleware } from './mockUserAuth'
