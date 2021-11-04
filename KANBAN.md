@@ -17,17 +17,17 @@
 * Write Mock User login Tests
 * Write Mock User login
 ## Done in ~2h00m
-### Next Commit
 * Write User Auth Middleware Tests
 * Write User Auth Middleware login
 ## Done in ~2h30m
 ## Done in ~3h00m
+### Next Commit
 
 # Doing
-
-# Backlog
 * Write Create Request endpoint Test
 * Write Create Request endpoint
+
+# Backlog
 * Write Get All Requests endpoint Test
 * Write Get All Requests endpoint
 * Write Get Request By ID endpoint Test

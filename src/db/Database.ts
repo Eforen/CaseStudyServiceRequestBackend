@@ -19,6 +19,18 @@ export interface ServiceRequest {
     lastModifiedDate: number
 }
 
+export type StrippedServiceRequest = Omit<
+Omit<
+    Omit<
+        Omit<
+            Omit<
+                ServiceRequest
+                , 'id'>
+            , 'createdBy'>
+        , 'createdDate'>
+    , 'lastModifiedBy'>
+, 'lastModifiedDate'>
+
 export interface IDatabaseState {
     requests: ServiceRequest[]
 }
@@ -148,6 +160,8 @@ export default class RamDatabase implements IDatabase {
      * Find the all requests that matches the mask
      */
     async find(matchMask: Partial<ServiceRequest>) {
+        if(matchMask == {}) return this.state.requests
+
         return this.state.requests.filter((request) => {
             var keys = Object.keys(matchMask)
             for (const maskKey in keys){

@@ -1,9 +1,11 @@
 import request from "supertest";
-import { app } from "../../../app"
 import jwt from 'jsonwebtoken'
 import * as uuid from 'uuid'
 import { CONFIG } from "../../../config";
 import { AuthMiddleware } from ".";
+
+import { MakeApp } from "../../../app"
+const app = MakeApp()
 
 /** This should ONLY be used by tests */
 export function MakeUnsafeUserToken(username: string){

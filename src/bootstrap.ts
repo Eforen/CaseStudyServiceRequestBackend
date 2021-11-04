@@ -1,4 +1,4 @@
 import { CONFIG } from './config'
-import { app } from './app'
+import { MakeApp } from './app'
 
-app.listen(CONFIG.PORT, ()=> console.log(`Server listening on ${CONFIG.PORT}`))
+MakeApp().listen(CONFIG.PORT, ()=> console.log(`Server listening on ${CONFIG.PORT}`))
