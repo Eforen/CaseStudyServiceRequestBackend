@@ -1,22 +1,27 @@
 # Done
 
-## Done in ~30
+## Done in ~30m
 * Make Kanban
 * Write Case Study File
 * Write Swagger File
+## Done in ~60m
 * Plan Project
 * Stand Up Express / Jest / Supertest Scaffold
 * Write Ping Test
 * Test Ping route via actual request
-
-### Next Commit
 * Refactor to use routes folder
+### Next Commit
+* Write Mock Database Tests
+* Write Mock Database
+## Done in ~1h30m
+## Done in ~2h00m
+## Done in ~2h30m
+## Done in ~3h00m
+
 
 # Doing
 
 # Backlog
-* Write Mock Database Tests
-* Write Mock Database
 * Write Mock User login Tests
 * Write Mock User login
 * Write User Auth Middleware Tests
