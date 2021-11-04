@@ -1,0 +1,135 @@
+openapi: '3.0.2'
+info:
+  description: Maintenance service request system
+  title: Building maintenance service system backend
+  version: '1.0'
+servers:
+  - url: https://localhost:3000/api
+
+components:
+  schemas:
+    ServiceRequest:
+      type: object
+      properties:
+        id:
+          type: string
+        buildingCode:
+          type: string
+        description:
+          type: string
+        currentStatus:
+          $ref: '#/components/schemas/CurrentStatus'
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: dateTime
+        lastModifiedBy:
+          type: string
+        lastModifiedDate:
+          type: string
+          format: dateTime
+    CurrentStatus:
+      type: string
+      enum: 
+        - NotApplicable
+        - Created
+        - InProgress
+        - Complete
+        - Canceled
+  examples:
+    simple:
+      summary: Simple example of a service request data object
+      value:
+        id: "727b376b-79ae-498e-9cff-a9f51b848ea4"
+        buldingCode: "COH"
+        description: "Please turn up the AC in suite 1200D. It is too hot here."
+        currentStatus: "Created"
+        createdBy: "Nik Patel"
+        createdDate: "2019-08-01T14:25:43.511Z"
+        lastModifiedBy: "Jane Doe"
+        lastModifiedDate: "2019-08-01T15:01:23.511Z"
+paths:
+  /servicerequest:
+    get:
+      description: Read all service requests
+      responses:
+        '200':
+          description: list of service requests
+        '204':
+          description: empty content
+
+    post:
+      description: Create new service request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceRequest'
+            examples:
+              simple:
+                $ref: '#/components/examples/simple'
+      responses:
+        '201':
+          description: created service request with id
+        '400':
+          description: bad request
+
+  /servicerequest/{id}:
+    get:
+      description: Read service request by id.
+      parameters:
+      - in: "path"
+        name: id
+        description: "ID of service to return"
+        required: true
+        schema:
+          type: string
+          format: GUID
+      responses:
+        '200':
+          description: single service request
+        '404':
+          description: not found
+
+    put:
+      description: update service request based on id
+      parameters:
+      - in: "path"
+        name: id
+        description: "ID of service to return"
+        required: true
+        schema:
+          type: string
+          format: GUID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceRequest'
+            examples:
+              simple:
+                $ref: '#/components/examples/simple'
+      responses:
+        '200':
+          description: updated service request
+        '400':
+          description: bad service request
+        '404':
+          description: not found
+
+    delete:
+      description: delete service request based on id
+      parameters:
+      - in: "path"
+        name: id
+        description: "ID of service to return"
+        required: true
+        schema:
+          type: string
+          format: GUID
+      responses:
+        '201':
+          description: successful
+        '404':
+          description: not found
