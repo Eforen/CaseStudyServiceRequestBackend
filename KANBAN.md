@@ -4,17 +4,17 @@
 * Make Kanban
 * Write Case Study File
 * Write Swagger File
-
-### Next Commit
 * Plan Project
 * Stand Up Express / Jest / Supertest Scaffold
 * Write Ping Test
 * Test Ping route via actual request
 
+### Next Commit
+* Refactor to use routes folder
+
 # Doing
 
 # Backlog
-* Refactor to use routes folder
 * Write Mock Database Tests
 * Write Mock Database
 * Write Mock User login Tests

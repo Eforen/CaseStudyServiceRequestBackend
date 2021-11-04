@@ -1,7 +1,8 @@
 import express from "express"
 
+import routes from "../routes"
+
 export const app = express()
 app.use(express.json())
 
-// app.use('/api', routes)
-app.get('/ping', (req: express.Request, res: express.Response) => res.status(200).json({status: 'OK'}))
+app.use('/', routes)
