@@ -65,7 +65,7 @@ export default class RamDatabase implements IDatabase {
         }
 
         this.state.requests.push(createdRequest)
-
+        
         return createdRequest
     }
 

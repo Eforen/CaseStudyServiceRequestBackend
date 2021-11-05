@@ -1,10 +1,10 @@
 import { MakeUnsafeUserToken } from "../routes/API/User/mockUserAuth.spec";
 import request from "supertest";
 import { MakeApp } from "../app"
-import RamDatabase from "../db/Database";
+import RamDatabase, { CurrentStatus } from "../db/Database";
 
 const db = new RamDatabase()
-const app = MakeApp()
+const app = MakeApp({db: db})
 
 describe('Server Endpoints', ()=>{
     describe('/ping', ()=>{
@@ -32,7 +32,7 @@ describe('Server Endpoints', ()=>{
                     .set('authorization', 'Bearer '+MakeUnsafeUserToken("YoloMan"))
                     .send({
                         buildingCode: "Test1",
-                        description: "Test2",
+                        description: "Test2"
                     })
                     .expect('Content-Type', /json/)
                     .expect(200)
@@ -51,7 +51,6 @@ describe('Server Endpoints', ()=>{
                 expect(res.body).toHaveProperty('lastModifiedBy')
                 expect(res.body).toHaveProperty('lastModifiedDate')
                 var all = await db.all()
-                console.log(all)
                 expect(all.length).toEqual(1)
                 expect(all[0]).toHaveProperty('id')
                 expect(all[0]).toHaveProperty('buildingCode')
@@ -59,7 +58,7 @@ describe('Server Endpoints', ()=>{
                 expect(all[0]).toHaveProperty('description')
                 expect(all[0].description).toEqual('Test2')
                 expect(all[0]).toHaveProperty('currentStatus')
-                expect(all[0].currentStatus).toEqual('Created')
+                expect(all[0].currentStatus).toEqual(CurrentStatus.Created)// This is the internal value of Created
                 expect(all[0]).toHaveProperty('createdBy')
                 expect(all[0]).toHaveProperty('createdDate')
                 expect(all[0]).toHaveProperty('lastModifiedBy')
@@ -78,6 +77,8 @@ describe('Server Endpoints', ()=>{
                     })
                     .expect('Content-Type', /json/)
                     .expect(200)
+                var all = await db.all()
+                expect(all.length).toEqual(1)
                 const res = await request(app)
                     .get('/api/servicerequest')
                     .accept('application/json')

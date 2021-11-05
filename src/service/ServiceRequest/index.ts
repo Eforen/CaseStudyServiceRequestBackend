@@ -7,13 +7,13 @@ export class ServiceRequestService {
         //Would normally check the creator is a user
         //Maybe would check the buildingCode is in the DB here
         // A little data sanity checking
-        if(creator.length < 3){
+        if(!creator || creator.length < 3){
             throw new Error('Creator\'s name must be at least 3 characters long');
         }
-        if(buildingCode.length <= 0) {
+        if(!buildingCode || buildingCode.length <= 0) {
             throw new Error('Building code must not be empty');
         }
-        if(description.length < 3) {
+        if(!description || description.length < 3) {
             throw new Error('Description must be at least 3 characters long');
         }
 
@@ -21,6 +21,6 @@ export class ServiceRequestService {
     }
 
     async GetAll() {
-        this._repo.get({})
+        return this._repo.get({})
     }
 }

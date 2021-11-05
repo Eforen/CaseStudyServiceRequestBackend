@@ -21,11 +21,12 @@
 * Write User Auth Middleware login
 ## Done in ~2h30m
 ## Done in ~3h00m
+## Done More then 3h
 ### Next Commit
-
-# Doing
 * Write Create Request endpoint Test
 * Write Create Request endpoint
+
+# Doing
 
 # Backlog
 * Write Get All Requests endpoint Test
