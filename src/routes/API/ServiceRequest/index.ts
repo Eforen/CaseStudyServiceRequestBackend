@@ -8,9 +8,9 @@ export const MakeServiceRequestRouter = (controller: ServiceRequestController)=>
 
     router.get('/', controller.getAll.bind(controller));
     router.post('/', controller.create.bind(controller));
-    // router.get('/{id}', controller.getID);
-    // router.put('/{id}', controller.updateID);
-    // router.delete('/{id}', controller.deleteID);
+    router.get('/:id', controller.getByID.bind(controller));
+    // router.put('/:id', controller.updateID);
+    // router.delete('/:id', controller.deleteID);
     return router;
 }
 export default MakeServiceRequestRouter;

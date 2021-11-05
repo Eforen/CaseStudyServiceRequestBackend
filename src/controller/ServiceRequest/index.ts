@@ -30,4 +30,15 @@ export class ServiceRequestController {
             return {...request, currentStatus: CurrentStatus[request.currentStatus]}
         }))
     }
+
+    async getByID(req: express.Request, res: express.Response){
+        // Check if logged in
+        const username = req.auth.username;
+        if(username == undefined){
+            return res.status(400).json({ status: 'NOPE' })
+        }
+        // This would be a great place to check if user has permissions to view them and only get the ones the user can see
+        const request = await this._service.GetByID(req.params.id.toString())
+        res.status(200).json({...request, currentStatus: CurrentStatus[request.currentStatus]})
+    }
 }

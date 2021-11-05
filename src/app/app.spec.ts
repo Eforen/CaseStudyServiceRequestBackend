@@ -184,29 +184,29 @@ describe('Server Endpoints', ()=>{
                 expect(res[0].body).toMatchObject({
                     buildingCode:'Test1',
                     description: 'Test2',
-                    createdBy: 'tester1',
-                    lastModifiedBy: 'tester1',
+                    createdBy: 'Tester1',
+                    lastModifiedBy: 'Tester1',
                 })
                 
                 expect(res[1].body).toMatchObject({
                     buildingCode:'Test3',
                     description: 'Test4',
-                    createdBy: 'tester2',
-                    lastModifiedBy: 'tester2',
+                    createdBy: 'Tester2',
+                    lastModifiedBy: 'Tester2',
                 })
                 
                 expect(res[2].body).toMatchObject({
                     buildingCode:'Test5',
                     description: 'Test6',
-                    createdBy: 'tester3',
-                    lastModifiedBy: 'tester3',
+                    createdBy: 'Tester3',
+                    lastModifiedBy: 'Tester3',
                 })
                 
                 expect(res[3].body).toMatchObject({
                     buildingCode:'Test7',
                     description: 'Test8',
-                    createdBy: 'tester4',
-                    lastModifiedBy: 'tester4',
+                    createdBy: 'Tester4',
+                    lastModifiedBy: 'Tester4',
                 })
                 done()
             })

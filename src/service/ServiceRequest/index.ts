@@ -23,4 +23,16 @@ export class ServiceRequestService {
     async GetAll() {
         return this._repo.get({})
     }
+
+    async GetByID(ID: string) {
+        const trimmedID = ID.trim()
+        if(trimmedID.match(/[\da-fA-F\-]/g)?.length != trimmedID.length) {
+            throw new Error('This id appears to be invalid');
+        }
+        let requestArr = await this._repo.get({id: trimmedID})
+        if(requestArr.length == 0) {
+            throw new Error('Request not found');
+        }
+        return requestArr[0]
+    }
 }

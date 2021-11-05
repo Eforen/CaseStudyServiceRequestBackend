@@ -78,7 +78,9 @@ describe('ServiceRequest Repository', () => {
         expect(all[0]).toHaveProperty('lastModifiedBy')
         expect(all[0].lastModifiedBy).toEqual('Nik Patel')
         var get = await repository.get({id: all[0].id})
-        expect(get).toMatchObject({
+        expect(get).toHaveProperty('length')
+        expect(get.length).toEqual(1)
+        expect(get[0]).toMatchObject({
             buildingCode:'COH',
             description: 'Please turn up the AC in suite 1200D. It is too hot here.',
             createdBy: 'Nik Patel',

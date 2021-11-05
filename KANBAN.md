@@ -27,12 +27,12 @@
 * Write Get All Requests endpoint Test
 * Write Get All Requests endpoint
 ### Next Commit
+* Write Get Request By ID endpoint Test
+* Write Get Request By ID endpoint
 
 # Testing
-* Write Get Request By ID endpoint Test
 
 # Doing
-* Write Get Request By ID endpoint
 
 # Backlog
 * Write Update Request By ID endpoint Test
