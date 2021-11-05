@@ -22,17 +22,19 @@
 ## Done in ~2h30m
 ## Done in ~3h00m
 ## Done More then 3h
-### Next Commit
 * Write Create Request endpoint Test
 * Write Create Request endpoint
-
-# Doing
-
-# Backlog
 * Write Get All Requests endpoint Test
 * Write Get All Requests endpoint
+### Next Commit
+
+# Testing
 * Write Get Request By ID endpoint Test
+
+# Doing
 * Write Get Request By ID endpoint
+
+# Backlog
 * Write Update Request By ID endpoint Test
 * Write Update Request By ID endpoint
 * Write Delete Request By ID endpoint Test

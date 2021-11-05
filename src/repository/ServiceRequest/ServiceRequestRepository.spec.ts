@@ -60,8 +60,30 @@ describe('ServiceRequest Repository', () => {
             createdBy: 'Nik Patel',
             lastModifiedBy: 'Nik Patel',
         })
-        get = []
-        get = await repository.get({id: all[0].id})
+        done()
+    })
+    it('should get by id', async done => {
+        repository.make({
+            buildingCode: "COH",
+            description: "Please turn up the AC in suite 1200D. It is too hot here."
+        }, "Nik Patel")
+        var all = await db.all()
+        expect(all.length).toEqual(1)
+        expect(all[0]).toHaveProperty('buildingCode')
+        expect(all[0].buildingCode).toEqual('COH')
+        expect(all[0]).toHaveProperty('description')
+        expect(all[0].description).toEqual('Please turn up the AC in suite 1200D. It is too hot here.')
+        expect(all[0]).toHaveProperty('createdBy')
+        expect(all[0].createdBy).toEqual('Nik Patel')
+        expect(all[0]).toHaveProperty('lastModifiedBy')
+        expect(all[0].lastModifiedBy).toEqual('Nik Patel')
+        var get = await repository.get({id: all[0].id})
+        expect(get).toMatchObject({
+            buildingCode:'COH',
+            description: 'Please turn up the AC in suite 1200D. It is too hot here.',
+            createdBy: 'Nik Patel',
+            lastModifiedBy: 'Nik Patel',
+        })
         done()
     })
     it('should update', async done => {

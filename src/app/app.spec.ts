@@ -103,5 +103,113 @@ describe('Server Endpoints', ()=>{
                 done()
             })
         })
+        describe('/servicerequest/{id}', ()=>{
+            beforeEach(()=>{
+                db.clear()
+            })
+
+            it('should get an element when get is called with ID', async done=>{
+                const calls = [
+                    await request(app)
+                        .post('/api/servicerequest')
+                        .accept('application/json')
+                        .set('authorization', 'Bearer '+MakeUnsafeUserToken("Tester1"))
+                        .send({
+                            buildingCode: "Test1",
+                            description: "Test2",
+                        })
+                        .expect('Content-Type', /json/)
+                        .expect(200),
+                    await request(app)
+                        .post('/api/servicerequest')
+                        .accept('application/json')
+                        .set('authorization', 'Bearer '+MakeUnsafeUserToken("Tester2"))
+                        .send({
+                            buildingCode: "Test3",
+                            description: "Test4",
+                        })
+                        .expect('Content-Type', /json/)
+                        .expect(200),
+                    await request(app)
+                        .post('/api/servicerequest')
+                        .accept('application/json')
+                        .set('authorization', 'Bearer '+MakeUnsafeUserToken("Tester3"))
+                        .send({
+                            buildingCode: "Test5",
+                            description: "Test6",
+                        })
+                        .expect('Content-Type', /json/)
+                        .expect(200),
+                    await request(app)
+                        .post('/api/servicerequest')
+                        .accept('application/json')
+                        .set('authorization', 'Bearer '+MakeUnsafeUserToken("Tester4"))
+                        .send({
+                            buildingCode: "Test7",
+                            description: "Test8",
+                        })
+                        .expect('Content-Type', /json/)
+                        .expect(200)
+                ]
+                var all = await db.all()
+                expect(all.length).toEqual(4)
+
+                const res = [
+                    await request(app)
+                        .get(`/api/servicerequest/${calls[0].body.id}`)
+                        .accept('application/json')
+                        .set('authorization', 'Bearer '+MakeUnsafeUserToken("YoloMan"))
+                        .expect('Content-Type', /json/)
+                        .expect(200),
+                    await request(app)
+                        .get(`/api/servicerequest/${calls[1].body.id}`)
+                        .accept('application/json')
+                        .set('authorization', 'Bearer '+MakeUnsafeUserToken("YoloMan"))
+                        .expect('Content-Type', /json/)
+                        .expect(200),
+                    await request(app)
+                        .get(`/api/servicerequest/${calls[2].body.id}`)
+                        .accept('application/json')
+                        .set('authorization', 'Bearer '+MakeUnsafeUserToken("YoloMan"))
+                        .expect('Content-Type', /json/)
+                        .expect(200),
+                    await request(app)
+                        .get(`/api/servicerequest/${calls[3].body.id}`)
+                        .accept('application/json')
+                        .set('authorization', 'Bearer '+MakeUnsafeUserToken("YoloMan"))
+                        .expect('Content-Type', /json/)
+                        .expect(200)
+                ]
+                
+                expect(res[0].body).toMatchObject({
+                    buildingCode:'Test1',
+                    description: 'Test2',
+                    createdBy: 'tester1',
+                    lastModifiedBy: 'tester1',
+                })
+                
+                expect(res[1].body).toMatchObject({
+                    buildingCode:'Test3',
+                    description: 'Test4',
+                    createdBy: 'tester2',
+                    lastModifiedBy: 'tester2',
+                })
+                
+                expect(res[2].body).toMatchObject({
+                    buildingCode:'Test5',
+                    description: 'Test6',
+                    createdBy: 'tester3',
+                    lastModifiedBy: 'tester3',
+                })
+                
+                expect(res[3].body).toMatchObject({
+                    buildingCode:'Test7',
+                    description: 'Test8',
+                    createdBy: 'tester4',
+                    lastModifiedBy: 'tester4',
+                })
+                done()
+            })
+        })
     })
 })
